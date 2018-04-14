@@ -9,8 +9,9 @@ export class MessageRankingItem extends React.Component {
         const totalMessageCount = this.props.totalMessageCount;
 
         return (
-            <ListGroupItem className="messageRankingItem">
-                <h4>{messagePartner} - <Badge>{totalMessageCount}</Badge></h4>
+            <ListGroupItem>
+                <h4><div className="messageRankingItem-partner">{messagePartner}
+                    </div><Badge className="messageRankingItem-badge">{totalMessageCount}</Badge></h4>
             </ListGroupItem>
         );
     }

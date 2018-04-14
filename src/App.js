@@ -53,13 +53,13 @@ class App extends React.Component {
                 <InfoBoard/>
 
                 <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
-                    <div className='dropzone--dropimg' borderStyle="none">
+                    <div className='dropzone--dropimg'>
                         <img src={dropimg} height="50px"/>
                     </div>
                 </Dropzone>
-
+                <hr/>
                 <div>
-                    <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
+                    <MessageRanking messages={messages} yearFrom={2000} yearTo={3000}/>
                 </div>
                 <div>
                     <Loader fullPage loading={isLoading} text={loadingMessage}/>
