@@ -56,7 +56,7 @@ class App extends React.Component {
                 </Dropzone>
 
                 <div>
-                    <MessageRanking messages={messages}/>
+                    <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
                 </div>
                 <div>
                     <Loader fullPage loading={isLoading} text={loadingMessage}/>
