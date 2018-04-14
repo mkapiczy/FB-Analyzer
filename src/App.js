@@ -5,6 +5,8 @@ import {Loader} from "./Loader";
 import _ from "lodash";
 import axios from "axios";
 import Dropzone from 'react-dropzone'
+import { Button } from 'reactstrap';
+import './styles.css';
 
 class App extends React.Component {
     state = {
@@ -12,8 +14,9 @@ class App extends React.Component {
         isLoading: false
     };
 
-    showLoadingPage() {
-        this.setState({isLoading: true});
+    setTimeoutOnLoader() {
+        this.setState({ isLoading: true});
+        setTimeout(() => this.setState({ isLoading: false }), 1500);
     }
 
     onDrop(files) {
@@ -57,10 +60,7 @@ class App extends React.Component {
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
-                    <button className="test-btn" onClick={() => this.showLoadingPage()}>
-                        test
-                    </button>
-
+                    <Button color="primary" className="test-btn" onClick={() => this.setTimeoutOnLoader()}>test</Button>
                 </section>
             );
         } else {
