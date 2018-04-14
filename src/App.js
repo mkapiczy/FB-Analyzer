@@ -6,7 +6,7 @@ import axios from "axios";
 import Dropzone from 'react-dropzone'
 import dropimg from './resources/drop_image.png'
 
-import {MessageRanking} from "./MessageRanking"
+import { MessageRanking } from "./MessageRanking"
 import { MyNavbar } from "./MyNavbar"
 import { Loader } from 'react-overlay-loader'
 
@@ -18,7 +18,7 @@ import './styles.css'
 class App extends React.Component {
     state = {
         loadingMessage: 'Brace yourself! Your data is being processed!',
-        messageRanking: [],
+        messages: [],
         isLoading: false
     };
 
@@ -34,7 +34,7 @@ class App extends React.Component {
             axios.post('http://localhost:3001/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(response => {
                     console.log(response.data)
-                    this.setState({messageRanking: response.data, isLoading: false});
+                    this.setState({messages: response.data, isLoading: false});
                 })
                 .catch(error => {
                     console.log(error)
@@ -43,17 +43,9 @@ class App extends React.Component {
     }
 
     render() {
-        const isLoading = this.state.isLoading;
-        const messageRanking = this.state.messageRanking;
-        const sortedMessageRanking = _.sortBy(messageRanking, "totalMessageCount").reverse();
-
-        const messageRankingComponent = sortedMessageRanking.map(rankingEntry => (
-            <MessageRanking
-                totalMessageCount={rankingEntry.totalMessageCount}
-                messagePartner={rankingEntry.messagePartner}
-                messageCountByYears={rankingEntry.messageCountByYears}
-            />
-        ));
+        const isLoading = this.state.isLoading
+        const messages = this.state.messages
+        const loadingMessage = this.state.loadingMessage
 
             return (
                 <section>
@@ -66,10 +58,10 @@ class App extends React.Component {
                         </Dropzone>
                     </div>
                     <div>
-                        <ul>{messageRankingComponent}</ul>
+                        <MessageRanking messages={messages}/>
                     </div>
                     <div>
-                        <Loader fullPage loading={isLoading} text={this.state.loadingMessage} />
+                        <Loader fullPage loading={isLoading} text={loadingMessage} />
                     </div>
                 </section>
             );
