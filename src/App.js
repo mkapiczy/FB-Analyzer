@@ -7,6 +7,7 @@ import axios from "axios";
 import './styles.css';
 import Dropzone from 'react-dropzone'
 import dropimg from './resources/drop_image.png'
+import {MyNavbar} from "./MyNavbar";
 
 class App extends React.Component {
     state = {
@@ -50,6 +51,7 @@ class App extends React.Component {
         if (!isLoading) {
             return (
                 <section>
+                    <MyNavbar/>
                     <div className="dropzone">
                         <Dropzone onDrop={this.onDrop.bind(this)}>
                             <div className='dropzone--dropimg'>
