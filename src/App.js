@@ -5,11 +5,8 @@ import {Loader} from "./Loader";
 import _ from "lodash";
 import axios from "axios";
 import Dropzone from 'react-dropzone'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
 
 class App extends React.Component {
-    
     state = {
         messageRanking: [],
         isLoading: false
@@ -62,7 +59,10 @@ class App extends React.Component {
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
-                    <Button color="primary" className="test-btn" onClick={() => this.setTimeoutOnLoader()}>test</Button>{''}
+                    <button className="test-btn" onClick={() => this.setTimeoutOnLoader()}>
+                   test
+                </button>
+                    
                 </section>
             );
         } else {
