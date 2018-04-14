@@ -3,12 +3,11 @@ import './Loader.css';
 
 export class Loader extends React.Component {
     render() {
-        const isLoading = this.state.isLoading;
-
         return (
-            <li>
+            <div>
                 <div className="loader"></div>
-            </li>
+                <div>Brace yourself! Your data is being processed!</div>
+            </div>
         );
     }
 }
