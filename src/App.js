@@ -3,13 +3,12 @@ import {render} from "react-dom";
 
 import axios from "axios";
 import './App.css';
-import Dropzone from 'react-dropzone'
-import dropimg from './resources/drop_image.png'
 
 import {MessageRanking} from "./MessageRanking"
 import {MyNavbar} from "./MyNavbar"
 import {Loader} from 'react-overlay-loader'
-import { InfoBoard } from "./InfoBoard";
+import {InfoBoard} from "./InfoBoard";
+import {MyDropzone} from "./MyDropzone";
 
 import 'react-overlay-loader/styles.css'
 
@@ -21,14 +20,14 @@ class App extends React.Component {
         isLoading: false
     };
 
-    showLoadingPage() {
+    showLoadingPage = () => {
         this.setState({isLoading: true});
     }
 
-    onDrop(files) {
+    onDrop = (files) => {
         files.forEach(f => {
             this.showLoadingPage()
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append("file", f);
             axios.post('http://localhost:3001/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(response => {
@@ -52,18 +51,11 @@ class App extends React.Component {
 
                 <InfoBoard/>
 
-                <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
-                    <div className='dropzone--dropimg' borderStyle="none">
-                        <img src={dropimg} height="50px"/>
-                    </div>
-                </Dropzone>
+                <MyDropzone onDrop={this.onDrop}/>
 
-                <div>
-                    <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
-                </div>
-                <div>
-                    <Loader fullPage loading={isLoading} text={loadingMessage}/>
-                </div>
+                <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
+
+                <Loader fullPage loading={isLoading} text={loadingMessage}/>
             </section>
         );
 
