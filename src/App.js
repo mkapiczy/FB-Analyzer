@@ -54,16 +54,16 @@ class App extends React.Component {
                 <section>
                     <div className="dropzone">
                         <Dropzone onDrop={this.onDrop.bind(this)}>
-                            <p>Try dropping some files here, or click to select files to upload.</p>
+                            <p>Drop your zip file here</p>
                         </Dropzone>
                     </div>
                     
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
-                    <button className="test-btn" onClick={() => this.setTimeoutOnLoader()}>
+                    <Button color='primary' className="test-btn" onClick={() => this.setTimeoutOnLoader()}>
                    test
-                </button>
+                </Button>
                     
                 </section>
             );
