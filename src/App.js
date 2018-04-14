@@ -12,14 +12,25 @@ import {Loader} from 'react-overlay-loader'
 import { InfoBoard } from "./InfoBoard";
 
 import 'react-overlay-loader/styles.css'
-
+import Nouislider from 'react-nouislider';
+import "./Nouislider.css";
+import wNumb from 'wnumb';
 
 class App extends React.Component {
     state = {
         loadingMessage: 'Brace yourself! Your data is being processed!',
         messages: [],
-        isLoading: false
+        isLoading: false,
+        fromYear: 2000,
+        toYear: 2018
     };
+
+    onUpdate = (values, handle) => {
+        this.setState({fromYear: values[0], toYear: values[1]})
+       
+        console.log('fromYear:  ', values[0])
+        console.log('toYear: ', values[1])
+     }
 
     showLoadingPage() {
         this.setState({isLoading: true});
@@ -57,14 +68,27 @@ class App extends React.Component {
                         <img src={dropimg} height="50px"/>
                     </div>
                 </Dropzone>
-
                 <div>
-                    <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
+                <Nouislider
+                onSlide = { this.onUpdate }
+                    range={{min: 2004, max: 2018}}
+                    step = {1}
+                    start={[2004, 2018]}
+                    format = {wNumb({
+                     deimals: 0
+                    })}
+                     connect = {true}
+                     tooltips
+       />
+                </div>
+                <div>
+                    <MessageRanking messages={messages} yearFrom={this.state.fromYear} 
+                    yearTo = {this.state.toYear}/>
                 </div>
                 <div>
                     <Loader fullPage loading={isLoading} text={loadingMessage}/>
                 </div>
-            </section>
+               </section>
         );
 
     }
