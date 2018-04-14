@@ -40,6 +40,11 @@ class App extends React.Component {
         })
     }
 
+    // isLoadingToPass = (boolean) => {
+    //     let loadingToPass = boolean;
+    // }
+
+
     render() {
         const isLoading = this.state.isLoading
         const messages = this.state.messages
@@ -51,7 +56,7 @@ class App extends React.Component {
 
                 <InfoBoard/>
 
-                <MyDropzone onDrop={this.onDrop}/>
+                <MyDropzone onDrop={this.onDrop} isLoading={isLoading}/>
 
                 <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
 
