@@ -86,7 +86,7 @@ class App extends React.Component {
 
                 <InfoBoard/>
 
-                <MyDropzone onDrop={this.onDrop}/>
+                <MyDropzone onDrop={this.onDrop} isLoading={isLoading}/>
 
                 <div class="mySlider">
                     <div class="slider-tooltip">{this.state.currentValue[0]} - {this.state.currentValue[1]}</div>

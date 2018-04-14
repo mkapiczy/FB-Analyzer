@@ -1,3 +1,5 @@
+
+
 .dropzone-styling {
     height: 200px;
     margin-top: 100px;
@@ -12,6 +14,7 @@
 
 
 .dropzone--dropimg {
+
     margin: 0;
     position: absolute;
     top: 50%;

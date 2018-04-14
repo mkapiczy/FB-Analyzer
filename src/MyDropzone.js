@@ -6,12 +6,14 @@ import './MyDropzone.css'
 export class MyDropzone extends React.Component {
 
     render() {
-        const onDrop = this.props.onDrop
-
+        const onDrop = this.props.onDrop;
+        const frameStyle = this.props.frameStyle;
+        const isLoaded = this.props.isLoading;
+     
         return (
             <Dropzone onDrop={onDrop} className={'dropzone-styling'}>
-                <div className='dropzone--dropimg' borderStyle="none">
-                    <img src={dropimg} height="50px"/>
+                <div className='dropzone--dropimg'>
+                    { !isLoaded ? <img src={dropimg} height="50px"/> : null }
                 </div>
             </Dropzone>
         )
