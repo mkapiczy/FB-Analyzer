@@ -1,6 +1,7 @@
 import React from "react";
-import {MessageRankingItem} from './MessageRankingItem'
-import {ListGroup} from 'react-bootstrap'
+import { MessageRankingItem } from './MessageRankingItem'
+import { ListGroup } from 'react-bootstrap'
+import "./MessageRanking.css"
 
 import _ from 'lodash'
 
@@ -33,7 +34,7 @@ export class MessageRanking extends React.Component {
         ));
 
         return (
-            <ListGroup>
+            <ListGroup className="messageRanking-background">
                 {messageRankingItems}
             </ListGroup>
         );

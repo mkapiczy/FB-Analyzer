@@ -3,13 +3,12 @@ import {render} from "react-dom";
 
 import axios from "axios";
 import './App.css';
-import Dropzone from 'react-dropzone'
-import dropimg from './resources/drop_image.png'
 
 import {MessageRanking} from "./MessageRanking"
 import {MyNavbar} from "./MyNavbar"
 import {Loader} from 'react-overlay-loader'
-import { InfoBoard } from "./InfoBoard";
+import {InfoBoard} from "./InfoBoard";
+import {MyDropzone} from "./MyDropzone";
 
 import 'react-overlay-loader/styles.css'
 import Nouislider from 'react-nouislider';
@@ -36,10 +35,10 @@ class App extends React.Component {
         this.setState({isLoading: true});
     }
 
-    onDrop(files) {
+    onDrop = (files) => {
         files.forEach(f => {
             this.showLoadingPage()
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append("file", f);
             axios.post('http://localhost:3001/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(response => {
@@ -63,12 +62,9 @@ class App extends React.Component {
 
                 <InfoBoard/>
 
-                <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
-                    <div className='dropzone--dropimg' borderStyle="none">
-                        <img src={dropimg} height="50px"/>
-                    </div>
-                </Dropzone>
-                <div>
+                <MyDropzone onDrop={this.onDrop}/>
+
+               
                 <Nouislider
                 onSlide = { this.onUpdate }
                     range={{min: 2004, max: 2018}}
@@ -79,16 +75,17 @@ class App extends React.Component {
                     })}
                      connect = {true}
                      tooltips
-       />
-                </div>
-                <div>
+                     />
+               
+              
                     <MessageRanking messages={messages} yearFrom={this.state.fromYear} 
                     yearTo = {this.state.toYear}/>
-                </div>
-                <div>
-                    <Loader fullPage loading={isLoading} text={loadingMessage}/>
-                </div>
-               </section>
+              
+              
+                <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
+
+                <Loader fullPage loading={isLoading} text={loadingMessage}/>
+            </section>
         );
 
     }
