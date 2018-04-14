@@ -1,4 +1,5 @@
 import React from "react";
+import { Badge } from 'reactstrap';
 
 export class MessageRanking extends React.Component {
     render() {
@@ -7,8 +8,8 @@ export class MessageRanking extends React.Component {
 
         return (
             <li>
-                <div className="messageCount">{messageCount}</div>
-                <div className="name">{name}</div>
+                <div className="messageCount"><Badge color="secondary"><h4>{messageCount}</h4></Badge></div>
+                <div className="name"><h4>{name}</h4></div>
             </li>
         );
     }
