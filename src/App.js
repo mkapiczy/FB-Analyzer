@@ -11,12 +11,10 @@ import {InfoBoard} from "./InfoBoard";
 import {MyDropzone} from "./MyDropzone";
 
 import 'react-overlay-loader/styles.css'
-import Nouislider from 'react-nouislider';
 import "./Nouislider.css";
-import wNumb from 'wnumb';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
 import './Slider.css'
-import Slider, {Range} from 'rc-slider';
+import Autosuggest from 'react-bootstrap-autosuggest'
 
 class App extends React.Component {
     state = {
@@ -28,7 +26,7 @@ class App extends React.Component {
         currentValue: [2000, 2018],
         min: 2000,
         max: 2018,
-        ticksLabels: []
+        searchTerm: ''
     };
 
     onUpdate = (values) => {
@@ -37,7 +35,10 @@ class App extends React.Component {
             toYear: values.target.value[1],
             currentValue: values.target.value
         })
-        this.updateTickLabels()
+    }
+
+    onUpdateSearch = (value) => {
+        this.setState({searchTerm: value});
     }
 
     showLoadingPage() {
@@ -60,26 +61,12 @@ class App extends React.Component {
         })
     }
 
-    updateTickLabels = () => {
-        let ticksLabels = []
-        for (let i = this.state.min; i <= this.state.max; i++) {
-            if (i === this.state.fromYear || i === this.state.toYear) {
-                ticksLabels.push(i.toString())
-            } else {
-                ticksLabels.push("")
-            }
-        }
-        this.setState({ticksLabels: ticksLabels})
-        return ticksLabels
-    }
-
     render() {
         const isLoading = this.state.isLoading
         const messages = this.state.messages
         const loadingMessage = this.state.loadingMessage
-        const ticksLabels = this.state.ticksLabels
-        console.log('ticks', ticksLabels)
-
+        const messagePartners = Array.from(new Set(messages.map(m => m.messagePartner)))
+        console.log('Partners', messagePartners)
         return (
             <section>
                 <MyNavbar/>
@@ -96,16 +83,16 @@ class App extends React.Component {
                         step={1}
                         min={this.state.min}
                         max={this.state.max}
-                        range={true}
-                        tooltip={'show'}
-                        tooltip_split={true}/>
+                        range={true}/>
                 </div>
 
-                <MessageRanking messages={messages} yearFrom={this.state.fromYear}
-                                yearTo={this.state.toYear}/>
+                <Autosuggest
+                    datalist={messagePartners}
+                    placeholder={"Filter by name"}
+                    onChange={this.onUpdateSearch}/>
 
-
-                <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
+                <MessageRanking messages={messages} yearFrom={this.state.fromYear} yearTo={this.state.toYear}
+                                searchTerm={this.state.searchTerm}/>
 
                 <Loader fullPage loading={isLoading} text={loadingMessage}/>
             </section>
