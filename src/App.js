@@ -6,6 +6,7 @@ import _ from "lodash";
 import axios from "axios";
 import './styles.css';
 import Dropzone from 'react-dropzone'
+import dropimg from './resources/drop_image.png'
 
 class App extends React.Component {
     state = {
@@ -51,7 +52,9 @@ class App extends React.Component {
                 <section>
                     <div className="dropzone">
                         <Dropzone onDrop={this.onDrop.bind(this)}>
-                            <p>Grop your facebook data file here, or click to select file to upload.</p>
+                            <div className='dropzone--dropimg'>
+                        <img src={dropimg} height="50px"/>
+                        </div>
                         </Dropzone>
                     </div>
                     <div>

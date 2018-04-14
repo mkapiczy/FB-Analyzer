@@ -6,9 +6,11 @@
     margin-right: 30%;
     color: '#EAFFD6';
 
+    border-width: 2;
+    border-color: '#666';
 }
 
-.dropzone p {
+.dropzone--dropimg {
     margin: 0;
     position: absolute;
     top: 50%;
