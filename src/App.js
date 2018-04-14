@@ -4,6 +4,7 @@ import {MessageRanking} from "./MessageRanking";
 import {Loader} from "./Loader";
 import _ from "lodash";
 import axios from "axios";
+import './styles.css';
 import Dropzone from 'react-dropzone'
 
 class App extends React.Component {
