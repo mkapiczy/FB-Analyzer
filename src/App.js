@@ -1,53 +1,41 @@
 import React from "react";
-import { render } from "react-dom";
-import { Organizer } from "./organizer";
+import {render} from "react-dom";
+import {MessageRanking} from "./MessageRanking";
 import _ from "lodash";
 import axios from "axios";
 import Dropzone from 'react-dropzone'
 
 class App extends React.Component {
     state = {
-        organizers: []
+        messageRanking: []
     };
-
-    upvote = async organizer => {
-        const response = await axios.post(
-            "https://auhack18react.now.sh/upvote/" + organizer.name
-        );
-        this.setState({ organizers: response.data });
-    };
-
-    async componentDidMount() {
-        const response = await axios.get("https://auhack18react.now.sh/organizers");
-
-        this.setState({ organizers: response.data });
-    }
 
     onDrop(files) {
         files.forEach(f => {
-            var reader = new FileReader();
-            reader.readAsText(f, "UTF-8");
-            reader.onload = function (evt) {
-                console.log(evt.target.result)
-            }
-            reader.onerror = function (evt) {
-                console.log("error reading file")
-            }
+            var formData = new FormData();
+            formData.append("file", f);
+            axios.post('http://localhost:3001/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data'}
+            }).then(response => {
+                console.log(response.data)
+                this.setState({messageRanking: response.data});
+            })
+            .then(error => {
+                console.log(error)
+            })
         })
     }
 
     render() {
-        const organizers = this.state.organizers;
-        const sortedOrganizers = _.sortBy(organizers, "votes").reverse();
+        const messageRanking = this.state.messageRanking;
+        const sortedMessageRanking = _.sortBy(messageRanking, "messageCount").reverse();
 
-        const organizersComponents = sortedOrganizers.map(organizer => (
-            <Organizer
-                votes={organizer.votes}
-                name={organizer.name}
-                clickHandler={() => this.upvote(organizer)}
+        const messageRankingComponent = sortedMessageRanking.map(rankingEntry => (
+            <MessageRanking
+                messageCount={rankingEntry.messageCount}
+                name={rankingEntry.name}
             />
         ));
-
 
 
         return (
@@ -58,12 +46,11 @@ class App extends React.Component {
                     </Dropzone>
                 </div>
                 <div>
-                <ul>{organizersComponents}</ul>
+                    <ul>{messageRankingComponent}</ul>
                 </div>
             </section>
         );
     }
-
 }
 
 export default App;
