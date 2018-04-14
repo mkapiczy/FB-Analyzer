@@ -9,6 +9,7 @@ import dropimg from './resources/drop_image.png'
 import {MessageRanking} from "./MessageRanking"
 import {MyNavbar} from "./MyNavbar"
 import {Loader} from 'react-overlay-loader'
+import { InfoBoard } from "./InfoBoard";
 
 import 'react-overlay-loader/styles.css'
 
@@ -48,6 +49,8 @@ class App extends React.Component {
         return (
             <section>
                 <MyNavbar/>
+
+                <InfoBoard/>
 
                 <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
                     <div className='dropzone--dropimg' borderStyle="none">
