@@ -14,6 +14,9 @@ import 'react-overlay-loader/styles.css'
 import Nouislider from 'react-nouislider';
 import "./Nouislider.css";
 import wNumb from 'wnumb';
+import ReactBootstrapSlider from 'react-bootstrap-slider';
+import './Slider.css'
+import Slider, {Range} from 'rc-slider';
 
 class App extends React.Component {
     state = {
@@ -21,15 +24,21 @@ class App extends React.Component {
         messages: [],
         isLoading: false,
         fromYear: 2000,
-        toYear: 2018
+        toYear: 2020,
+        currentValue: [2000, 2018],
+        min: 2000,
+        max: 2018,
+        ticksLabels: []
     };
 
-    onUpdate = (values, handle) => {
-        this.setState({fromYear: values[0], toYear: values[1]})
-       
-        console.log('fromYear:  ', values[0])
-        console.log('toYear: ', values[1])
-     }
+    onUpdate = (values) => {
+        this.setState({
+            fromYear: values.target.value[0],
+            toYear: values.target.value[1],
+            currentValue: values.target.value
+        })
+        this.updateTickLabels()
+    }
 
     showLoadingPage() {
         this.setState({isLoading: true});
@@ -51,15 +60,25 @@ class App extends React.Component {
         })
     }
 
-    // isLoadingToPass = (boolean) => {
-    //     let loadingToPass = boolean;
-    // }
-
+    updateTickLabels = () => {
+        let ticksLabels = []
+        for (let i = this.state.min; i <= this.state.max; i++) {
+            if (i === this.state.fromYear || i === this.state.toYear) {
+                ticksLabels.push(i.toString())
+            } else {
+                ticksLabels.push("")
+            }
+        }
+        this.setState({ticksLabels: ticksLabels})
+        return ticksLabels
+    }
 
     render() {
         const isLoading = this.state.isLoading
         const messages = this.state.messages
         const loadingMessage = this.state.loadingMessage
+        const ticksLabels = this.state.ticksLabels
+        console.log('ticks', ticksLabels)
 
         return (
             <section>
@@ -69,24 +88,23 @@ class App extends React.Component {
 
                 <MyDropzone onDrop={this.onDrop} isLoading={isLoading}/>
 
-               
-                <Nouislider
-                onSlide = { this.onUpdate }
-                    range={{min: 2004, max: 2018}}
-                    step = {1}
-                    start={[2004, 2018]}
-                    format = {wNumb({
-                     deimals: 0
-                    })}
-                     connect = {true}
-                     tooltips
-                     />
-               
-              
-                    <MessageRanking messages={messages} yearFrom={this.state.fromYear} 
-                    yearTo = {this.state.toYear}/>
-              
-              
+                <div class="mySlider">
+                    <div class="slider-tooltip">{this.state.currentValue[0]} - {this.state.currentValue[1]}</div>
+                    <ReactBootstrapSlider
+                        value={this.state.currentValue}
+                        change={this.onUpdate}
+                        step={1}
+                        min={this.state.min}
+                        max={this.state.max}
+                        range={true}
+                        tooltip={'show'}
+                        tooltip_split={true}/>
+                </div>
+
+                <MessageRanking messages={messages} yearFrom={this.state.fromYear}
+                                yearTo={this.state.toYear}/>
+
+
                 <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
 
                 <Loader fullPage loading={isLoading} text={loadingMessage}/>

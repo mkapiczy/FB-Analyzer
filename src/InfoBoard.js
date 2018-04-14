@@ -4,8 +4,9 @@ export class InfoBoard extends React.Component {
 
     render() {
         return (
-            <h1>How to begin</h1>
+            
             <ol>
+                <div>How to begin</div>
                 <li>Download facebook data</li>
                 <li>Remove images, and other files</li>
                 <li>Zip the data</li>
