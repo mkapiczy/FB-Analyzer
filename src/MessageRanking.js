@@ -1,4 +1,5 @@
 import React from "react";
+import { Badge } from 'reactstrap'
 
 export class MessageRanking extends React.Component {
     render() {
