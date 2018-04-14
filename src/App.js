@@ -34,14 +34,14 @@ class App extends React.Component {
 
     render() {
         const isLoading = this.state.isLoading;
-
         const messageRanking = this.state.messageRanking;
-        const sortedMessageRanking = _.sortBy(messageRanking, "messageCount").reverse();
+        const sortedMessageRanking = _.sortBy(messageRanking, "totalMessageCount").reverse();
 
         const messageRankingComponent = sortedMessageRanking.map(rankingEntry => (
             <MessageRanking
-                messageCount={rankingEntry.messageCount}
-                name={rankingEntry.name}
+                totalMessageCount={rankingEntry.totalMessageCount}
+                messagePartner={rankingEntry.messagePartner}
+                messageCountByYears={rankingEntry.messageCountByYears}
             />
         ));
 
@@ -50,17 +50,12 @@ class App extends React.Component {
                 <section>
                     <div className="dropzone">
                         <Dropzone onDrop={this.onDrop.bind(this)}>
-                            <p>Try dropping some files here, or click to select files to upload.</p>
+                            <p>Grop your facebook data file here, or click to select file to upload.</p>
                         </Dropzone>
                     </div>
-
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
-                    <button className="test-btn" onClick={() => this.showLoadingPage()}>
-                        test
-                    </button>
-
                 </section>
             );
         } else {
