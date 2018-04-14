@@ -21,17 +21,18 @@ class App extends React.Component {
 
     onDrop(files) {
         files.forEach(f => {
-            this.showLoadingPage()
             var formData = new FormData();
             formData.append("file", f);
-            axios.post('http://localhost:3001/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-                .then(response => {
-                    console.log(response.data)
-                    this.setState({messageRanking: response.data, isLoading: false});
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+            axios.post('http://localhost:3001/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data'}
+            }).then(response => {
+                console.log(response.data)
+                this.setState({messageRanking: response.data});
+                
+            })
+            .then(error => {
+                console.log(error)
+            })
         })
     }
 
@@ -56,15 +57,18 @@ class App extends React.Component {
                             <p>Try dropping some files here, or click to select files to upload.</p>
                         </Dropzone>
                     </div>
-
+                    
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
-                    <Button color="primary" className="test-btn" onClick={() => this.setTimeoutOnLoader()}>test</Button>
+                    <button className="test-btn" onClick={() => this.setTimeoutOnLoader()}>
+                   test
+                </button>
+                    
                 </section>
             );
         } else {
-            return <Loader/>;
+            return <div className="loader"></div>;
         }
     }
 }
