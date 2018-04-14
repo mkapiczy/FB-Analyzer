@@ -1,16 +1,23 @@
 import React from "react";
 import {render} from "react-dom";
-import {MessageRanking} from "./MessageRanking";
-import {Loader} from "./Loader";
+
 import _ from "lodash";
 import axios from "axios";
-import './styles.css';
 import Dropzone from 'react-dropzone'
 import dropimg from './resources/drop_image.png'
-import {MyNavbar} from "./MyNavbar";
+
+import {MessageRanking} from "./MessageRanking"
+import { MyNavbar } from "./MyNavbar"
+import { Loader } from 'react-overlay-loader'
+
+import 'react-overlay-loader/styles.css'
+import './styles.css'
+
+
 
 class App extends React.Component {
     state = {
+        loadingMessage: 'Brace yourself! Your data is being processed!',
         messageRanking: [],
         isLoading: false
     };
@@ -48,7 +55,6 @@ class App extends React.Component {
             />
         ));
 
-        if (!isLoading) {
             return (
                 <section>
                     <MyNavbar/>
@@ -62,11 +68,12 @@ class App extends React.Component {
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
+                    <div>
+                        <Loader fullPage loading={isLoading} text={this.state.loadingMessage} />
+                    </div>
                 </section>
             );
-        } else {
-            return <Loader/>;
-        }
+
     }
 }
 
