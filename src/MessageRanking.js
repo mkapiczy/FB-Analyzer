@@ -1,20 +1,27 @@
 import React from "react";
-import { Badge } from 'reactstrap'
+import { MessageRankingItem } from './MessageRankingItem'
+import { ListGroup } from 'react-bootstrap'
+
+import _ from 'lodash'
 
 export class MessageRanking extends React.Component {
     render() {
-        const messagePartner = this.props.messagePartner;
-        const totalMessageCount = this.props.totalMessageCount;
-        const messageCountByYears = JSON.stringify(this.props.messageCountByYears)
+        const messages = this.props.messages
 
+        const messagesSortedByTotalMessageCount = _.sortBy(messages, "totalMessageCount").reverse();
 
+        const messageRankingItems = messagesSortedByTotalMessageCount.map(conversation => (
+            <MessageRankingItem
+                totalMessageCount={conversation.totalMessageCount}
+                messagePartner={conversation.messagePartner}
+                messageCountByYears={conversation.messageCountByYears}
+            />
+        ));
 
         return (
-            <li>
-                <div className="messagePartner"><h4>{messagePartner}</h4></div>
-                <div className="totalMessageCount"><Badge color="secondary"><h4>{totalMessageCount}</h4></Badge></div>
-                <div className="messageCountByYears">{messageCountByYears}</div>
-            </li>
+            <ListGroup>
+                {messageRankingItems}
+            </ListGroup>
         );
     }
 }
