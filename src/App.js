@@ -4,7 +4,7 @@ import {MessageRanking} from "./MessageRanking";
 import {Loader} from "./Loader";
 import _ from "lodash";
 import axios from "axios";
-import './styles.css';
+import './App.css';
 import Dropzone from 'react-dropzone'
 import dropimg from './resources/drop_image.png'
 
@@ -50,13 +50,14 @@ class App extends React.Component {
         if (!isLoading) {
             return (
                 <section>
-                    <div className="dropzone">
-                        <Dropzone onDrop={this.onDrop.bind(this)}>
-                            <div className='dropzone--dropimg'>
+
+                        
+                        <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
+                            <div className='dropzone--dropimg' borderStyle="none">
                         <img src={dropimg} height="50px"/>
                         </div>
                         </Dropzone>
-                    </div>
+
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
