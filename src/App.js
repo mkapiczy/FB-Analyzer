@@ -12,25 +12,23 @@ class App extends React.Component {
         isLoading: false
     };
 
-    setTimeoutOnLoader() {
-        this.setState({ isLoading: true});
-        setTimeout(() => this.setState({ isLoading: false }), 1500);
+    showLoadingPage() {
+        this.setState({isLoading: true});
     }
 
     onDrop(files) {
         files.forEach(f => {
+            this.showLoadingPage()
             var formData = new FormData();
             formData.append("file", f);
-            axios.post('http://localhost:3001/upload', formData, {
-                headers: { 'Content-Type': 'multipart/form-data'}
-            }).then(response => {
-                console.log(response.data)
-                this.setState({messageRanking: response.data});
-                
-            })
-            .then(error => {
-                console.log(error)
-            })
+            axios.post('http://localhost:3001/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+                .then(response => {
+                    console.log(response.data)
+                    this.setState({messageRanking: response.data, isLoading: false});
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         })
     }
 
@@ -55,18 +53,18 @@ class App extends React.Component {
                             <p>Try dropping some files here, or click to select files to upload.</p>
                         </Dropzone>
                     </div>
-                    
+
                     <div>
                         <ul>{messageRankingComponent}</ul>
                     </div>
-                    <button className="test-btn" onClick={() => this.setTimeoutOnLoader()}>
-                   test
-                </button>
-                    
+                    <button className="test-btn" onClick={() => this.showLoadingPage()}>
+                        test
+                    </button>
+
                 </section>
             );
         } else {
-            return <div className="loader"></div>;
+            return <Loader/>;
         }
     }
 }
