@@ -10,8 +10,8 @@ export class MessageRanking extends React.Component {
 
         return (
             <li>
-                <div className="messagePartner">{messagePartner}</div>
-                <div className="totalMessageCount">{totalMessageCount}</div>
+                <div className="messagePartner"><h4>{messagePartner}</h4></div>
+                <div className="totalMessageCount"><Badge color="secondary"><h4>{totalMessageCount}</h4></Badge></div>
                 <div className="messageCountByYears">{messageCountByYears}</div>
             </li>
         );
