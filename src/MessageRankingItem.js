@@ -7,8 +7,6 @@ export class MessageRankingItem extends React.Component {
     render() {
         const messagePartner = this.props.messagePartner;
         const totalMessageCount = this.props.totalMessageCount;
-        const messageCountByYears = JSON.stringify(this.props.messageCountByYears)
-
 
         return (
             <ListGroupItem className="messageRankingItem">

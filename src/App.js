@@ -1,17 +1,17 @@
 import React from "react";
 import {render} from "react-dom";
 
-import _ from "lodash";
 import axios from "axios";
 import './App.css';
 import Dropzone from 'react-dropzone'
 import dropimg from './resources/drop_image.png'
 
-import { MessageRanking } from "./MessageRanking"
-import { MyNavbar } from "./MyNavbar"
-import { Loader } from 'react-overlay-loader'
+import {MessageRanking} from "./MessageRanking"
+import {MyNavbar} from "./MyNavbar"
+import {Loader} from 'react-overlay-loader'
+import { InfoBoard } from "./InfoBoard";
 
-
+import 'react-overlay-loader/styles.css'
 
 
 class App extends React.Component {
@@ -46,24 +46,26 @@ class App extends React.Component {
         const messages = this.state.messages
         const loadingMessage = this.state.loadingMessage
 
-            return (
-                <section>
-                    <MyNavbar/>
+        return (
+            <section>
+                <MyNavbar/>
 
-                    <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
+                <InfoBoard/>
+
+                <Dropzone onDrop={this.onDrop.bind(this)} className={'dropzone-styling'}>
                     <div className='dropzone--dropimg' borderStyle="none">
-                <img src={dropimg} height="50px"/>
-                </div>
+                        <img src={dropimg} height="50px"/>
+                    </div>
                 </Dropzone>
 
-                    <div>
-                        <MessageRanking messages={messages}/>
-                    </div>
-                    <div>
-                        <Loader fullPage loading={isLoading} text={loadingMessage} />
-                    </div>
-                </section>
-            );
+                <div>
+                    <MessageRanking messages={messages} yearFrom={2018} yearTo={3000}/>
+                </div>
+                <div>
+                    <Loader fullPage loading={isLoading} text={loadingMessage}/>
+                </div>
+            </section>
+        );
 
     }
 }
