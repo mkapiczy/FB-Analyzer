@@ -11,8 +11,6 @@ import { MessageRanking } from "./MessageRanking"
 import { MyNavbar } from "./MyNavbar"
 import { Loader } from 'react-overlay-loader'
 
-import 'react-overlay-loader/styles.css'
-import './styles.css'
 
 
 
