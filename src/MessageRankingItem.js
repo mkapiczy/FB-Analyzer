@@ -1,5 +1,6 @@
 import React from "react";
-import { ListGroupItem, Badge } from 'react-bootstrap'
+import { Badge } from 'reactstrap'
+import { ListGroupItem } from 'react-bootstrap'
 
 export class MessageRankingItem extends React.Component {
     render() {
@@ -9,7 +10,8 @@ export class MessageRankingItem extends React.Component {
 
 
         return (
-            <ListGroupItem><h4>{messagePartner}</h4> <Badge pullRight={true}>{totalMessageCount}</Badge>
+            <ListGroupItem>
+                <h4>{messagePartner} - <Badge>{totalMessageCount}</Badge></h4>
             </ListGroupItem>
         );
     }
