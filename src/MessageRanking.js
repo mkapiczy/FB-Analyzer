@@ -22,8 +22,10 @@ export class MessageRanking extends React.Component {
         const conversations = this.props.messages
         const yearFrom = this.props.yearFrom
         const yearTo = this.props.yearTo
+        const searchTerm = this.props.searchTerm
 
-        const conversationsWithFilteredMsgCount = this.filterMessageCountByYears(conversations, yearFrom, yearTo)
+        const conversationsFilteredByMessagePartner = _.filter(conversations, (c) => c.messagePartner.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)
+        const conversationsWithFilteredMsgCount = this.filterMessageCountByYears(conversationsFilteredByMessagePartner, yearFrom, yearTo)
         const messagesSortedByTotalMessageCount = _.sortBy(conversationsWithFilteredMsgCount, "totalMessageCount").reverse();
 
         const messageRankingItems = messagesSortedByTotalMessageCount.map(conversation => (
