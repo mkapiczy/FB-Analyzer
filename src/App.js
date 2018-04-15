@@ -86,7 +86,7 @@ class App extends React.Component {
                         range={true}/>
                 </div>
 
-                <Autosuggest
+                <Autosuggest className="searchbox"
                     datalist={messagePartners}
                     placeholder={"Filter by name"}
                     onChange={this.onUpdateSearch}/>

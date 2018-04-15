@@ -37,6 +37,10 @@ export class MessageRanking extends React.Component {
 
         return (
             <ListGroup className="messageRanking-background">
+                <MessageRankingItem
+                totalMessageCount={"no. of msgs"}
+                messagePartner={"Message Partner"}
+            />
                 {messageRankingItems}
             </ListGroup>
         );

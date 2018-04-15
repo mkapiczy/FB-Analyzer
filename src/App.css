@@ -33,6 +33,7 @@
 
 .mySlider {
   padding: 40px;
+  
 }
 
 .slider-tooltip {
@@ -40,4 +41,13 @@
   font-family: "Open Sans Condensed";
   font-size: larger;
   font-weight: bold;
+  
+  
+}
+
+.searchbox {
+  position: relative;
+  align-self: center;
+  padding: 40px;
+  margin-left: 10%;
 }
