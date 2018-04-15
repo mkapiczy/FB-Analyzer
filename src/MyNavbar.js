@@ -8,7 +8,7 @@ export class MyNavbar extends React.Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#home">FB-Data-Analyzer</a>
+                        FBDA
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>

@@ -1,0 +1,17 @@
+ol.info-list {
+    font-family: "Open Sans Condensed";
+    font-size: 30pt;
+}
+
+.header {
+    padding: 35px;
+    font-family: 'Open Sans Condensed';
+    font-size: 30pt;
+    text-align: center;
+}
+
+ol li {
+    margin-left: 10%;
+    width: 80%;
+    margin-bottom:5px;
+}
