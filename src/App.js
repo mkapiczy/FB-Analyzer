@@ -50,7 +50,7 @@ class App extends React.Component {
             this.showLoadingPage()
             let formData = new FormData();
             formData.append("file", f);
-            axios.post('https://sleepy-plains-46818.herokuapp.com/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+            axios.post('https://fb-analyzer-server.herokuapp.com/upload', formData, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(response => {
                     console.log(response.data)
                     this.setState({messages: response.data, isLoading: false});
