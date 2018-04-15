@@ -8,10 +8,10 @@ export class InfoBoard extends React.Component {
 
             <ol classNmae="info-list">
                 <div className="header">How to Use FBDA</div>
-                <li>Download your data from <a href="wwww.facebook.com">facebook</a>:
+                <li>Download your data from <a href="http://wwww.facebook.com" target="_blank">facebook</a>:
                     once logged in, go to settings and click "Download a copy of your facebook data".
                     You'll retrieve your data via email (may take quite a while, depending on the
-                    size of your data).
+                    size of your data). <a href="https://www.facebook.com/help/302796099745838" target="_blank">Full instruction</a>
                 </li>
                 <li>Once you have received the zip file with your data via email, unzip it, and remove every file that
                     does not have an .htm/.html extension (videos, photos, audio, gifs, stickers etc.). Remember to remove
